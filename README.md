@@ -23,7 +23,7 @@ Para destruir um barco é necessário acertar todos os seu quadrados. A vitória
 Siga os passos a baixo para rodar o jogo
 
 - Rodar Primeiro o arquivo server.ccp
-- Rodar o arquivo client.cpp para o jogador 1
-- Rodar o arquivo client2.ccp para o jogador 2
+- Rodar o arquivo client.cpp duas vezes para dois jogadores
+
 
 **Obs: A ordem deve ser seguida para o jogo funcionar corretamente**
