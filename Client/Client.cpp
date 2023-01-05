@@ -6,6 +6,8 @@
 
 using namespace std;
 
+int dado_armazento = 0;
+
 void verifica_linha_coluna(int* linha, int* coluna) {
 
 	int linhaaux, colunaaux;
@@ -30,13 +32,21 @@ void verifica_linha_coluna(int* linha, int* coluna) {
 
 }
 
-bool verifica_quadrados(char tabuleiro_jogador[10][10], int dado, int linha, int coluna) {
+bool verifica_quadrados(char tabuleiro_jogador[10][10], int dado, int linha, int coluna, int linha_jogada[42]) {
 
 	if (dado >=0 && dado < 3) {
 		
 		if (tabuleiro_jogador[linha][coluna] == '-' && tabuleiro_jogador[linha][coluna+1] == '-' && coluna <= 8) {
 			tabuleiro_jogador[linha][coluna] = 'S';
 			tabuleiro_jogador[linha][coluna+1] = 'S';
+
+			linha_jogada[dado_armazento] = linha;
+			linha_jogada[dado_armazento + 1] = coluna;
+
+			linha_jogada[dado_armazento + 2] = linha;
+			linha_jogada[dado_armazento + 3] = coluna + 1;
+
+			dado_armazento = dado_armazento + 4;
 			return true;
 			
 
@@ -53,6 +63,18 @@ bool verifica_quadrados(char tabuleiro_jogador[10][10], int dado, int linha, int
 			tabuleiro_jogador[linha][coluna] = 'P';
 			tabuleiro_jogador[linha][coluna+1] = 'P';
 			tabuleiro_jogador[linha][coluna+2] = 'P';
+
+
+			linha_jogada[dado_armazento] = linha;
+			linha_jogada[dado_armazento + 1] = coluna;
+
+			linha_jogada[dado_armazento + 2] = linha;
+			linha_jogada[dado_armazento + 3] = coluna + 1;
+
+			linha_jogada[dado_armazento +4] = linha;
+			linha_jogada[dado_armazento + 5] = coluna + 2;
+
+			dado_armazento = dado_armazento + 6;
 			return true;
 
 
@@ -70,6 +92,22 @@ bool verifica_quadrados(char tabuleiro_jogador[10][10], int dado, int linha, int
 			tabuleiro_jogador[linha][coluna + 1] = 'N';
 			tabuleiro_jogador[linha][coluna+2] = 'N';
 			tabuleiro_jogador[linha][coluna+3] = 'N';
+
+			linha_jogada[dado_armazento] = linha;
+			linha_jogada[dado_armazento + 1] = coluna;
+
+			linha_jogada[dado_armazento + 2] = linha;
+			linha_jogada[dado_armazento + 3] = coluna + 1;
+
+			linha_jogada[dado_armazento + 4] = linha;
+			linha_jogada[dado_armazento + 5] = coluna + 2;
+
+			linha_jogada[dado_armazento + 6] = linha;
+			linha_jogada[dado_armazento + 7] = coluna + 3;
+
+
+			dado_armazento = dado_armazento + 8;
+
 			return true;
 
 
@@ -87,6 +125,24 @@ bool verifica_quadrados(char tabuleiro_jogador[10][10], int dado, int linha, int
 			tabuleiro_jogador[linha][coluna+2] = 'P';
 			tabuleiro_jogador[linha][coluna+3] = 'P';
 			tabuleiro_jogador[linha][coluna+4] = 'P';
+
+			linha_jogada[dado_armazento] = linha;
+			linha_jogada[dado_armazento + 1] = coluna;
+
+			linha_jogada[dado_armazento + 2] = linha;
+			linha_jogada[dado_armazento + 3] = coluna + 1;
+
+			linha_jogada[dado_armazento + 4] = linha;
+			linha_jogada[dado_armazento + 5] = coluna + 2;
+
+			linha_jogada[dado_armazento + 6] = linha;
+			linha_jogada[dado_armazento + 7] = coluna + 3;
+
+			linha_jogada[dado_armazento + 8] = linha;
+			linha_jogada[dado_armazento + 9] = coluna + 4;
+
+			dado_armazento = dado_armazento + 10;
+
 			return true;
 
 
@@ -100,7 +156,7 @@ bool verifica_quadrados(char tabuleiro_jogador[10][10], int dado, int linha, int
 	}
 }
 
-void posicina_elementos(char tabuleiro_jogador[10][10], int dado) {
+void posicina_elementos(char tabuleiro_jogador[10][10], int dado, int linha_jogada[42]) {
 	int linha, coluna;
 	char p;
 	cout << "Digite Linha" << endl;
@@ -112,7 +168,7 @@ void posicina_elementos(char tabuleiro_jogador[10][10], int dado) {
 		
 		if (linha >= 1 && linha <= 10 && coluna >= 1 && coluna <= 10) {
 			if (tabuleiro_jogador[linha][coluna] == '-') {
-				if (verifica_quadrados(tabuleiro_jogador, dado, linha-1, coluna-1))
+				if (verifica_quadrados(tabuleiro_jogador, dado, linha-1, coluna-1, linha_jogada))
 					break;
 
 
@@ -129,7 +185,7 @@ void posicina_elementos(char tabuleiro_jogador[10][10], int dado) {
 
 }
 
-void introducao(char tabuleiro_jogador[10][10]) 
+void introducao(char tabuleiro_jogador[10][10], int linha_jogada[42])
 {
 	cout << "Bem-vindo ao Batalha Naval " << endl;
 	cout << "Voce e um almirante que tem a missao de derrubar as embarcacoes inimigas " << endl;
@@ -140,7 +196,7 @@ void introducao(char tabuleiro_jogador[10][10])
 	cout << "1x Porta - Avião = P" << endl;
 	int dados = 0;
 	for (int i = 0; i < 7; i++) {
-		posicina_elementos(tabuleiro_jogador, i);
+		posicina_elementos(tabuleiro_jogador, i, linha_jogada);
 
 	}
 
@@ -162,8 +218,22 @@ void imprimi(char tabuleiro_jogador[10][10]) {
 
 }
 
+void converte_Dados(char dados[42], int jogada[42]) {
+
+	for (int i = 0; i < 42; i++) {
+
+		dados[i] = static_cast<char>(jogada[i]);
+
+	}
+}
+
 int main()
 {
+
+	int linha_jogada[42] = {};
+	char jogada[42];
+	int vidaop = 0;
+	bool jogada_inicial = true;
 	int linha;
 	int coluna;
 	int vida = 21;
@@ -244,11 +314,13 @@ int main()
 		cout << "Client: Can start sending and receiving data...\n";
 	}
 
-	introducao(tabuleiro_jogador);
-
+	introducao(tabuleiro_jogador, linha_jogada);
+	converte_Dados(jogada, linha_jogada);
+	send(clientSocket, (char*)jogada, sizeof(jogada), NULL);
 	char buffer[5];
 	char aux_jogada[5];
 	system("clear||cls");
+
 	do {
 
 		cout << "TABULEIRO INIMIGO: " << endl;
@@ -268,9 +340,9 @@ int main()
 
 		memset(&buffer, 0, 5);
 
-
-		char a[5] = { static_cast<char>(vida),static_cast<char>(linha-1),static_cast<char>(coluna-1), ' ' ,'\0'};
-		int byteCount = send(clientSocket, (char*)a, sizeof(a), 0);
+		char vida_j = linha;
+		char a[5] = { static_cast<char>(vida), static_cast<char>(linha - 1),static_cast<char>(coluna - 1),'0','0'};
+		int byteCount = send(clientSocket, (char*)a, sizeof(a), NULL);
 
 		if (byteCount == 0)
 		{
@@ -288,7 +360,11 @@ int main()
 			WSACleanup();
 		}
 
-		if ((int)buffer[0] > 0) {
+
+		vida =  (int)buffer[0];
+		vidaop = (int)buffer[4];
+		if (vida > 0 && vidaop > 0) {
+
 			if (buffer[3] == 'A') {
 				cout << "ACERTOU" << endl;
 				tabuleiro_inimigo[(int)buffer[1]][(int)buffer[2]] = 'O';
@@ -301,44 +377,15 @@ int main()
 
 		}
 		else {
-			cout << "VOCE GANHOU" << endl;
+
+			if(vida == 0)
+				cout << "VOCE GANHOU" << endl;
+			else
+				cout << "VOCE GANHOU" << endl;
 			break;
 		}
 
-		//Aguarda a jogada do jogador dois
-		memset(&buffer, 0, 5);
-
-		cout << "Aguardando Jogador dois" << endl;
-		byteCount = recv(clientSocket, buffer, 5, 0);
-
-		if ((tabuleiro_jogador[(int)buffer[1]][(int)buffer[2]] != '-') && (tabuleiro_jogador[(int)buffer[1]][(int)buffer[2]] != 'X') && (tabuleiro_jogador[(int)buffer[1]][(int)buffer[2]] != 'O')) {
-			tabuleiro_jogador[(int)buffer[1]][(int)buffer[2]] = 'X';
-			vida = vida - 1;
-			aux_jogada[0] = static_cast<char>(vida);
-			aux_jogada[1] = static_cast<char>(linha);
-			aux_jogada[2] = static_cast<char>(coluna);
-			aux_jogada[3] = 'A';
-			aux_jogada[4] = '\0';
-
-			byteCount = send(clientSocket, (char*)aux_jogada, sizeof(aux_jogada), 0);
-
-			if (vida == 0) {
-				cout << "Voce Perdeu" << endl;
-				break;
-
-			}
-		}
-		else {
-			aux_jogada[0] = static_cast<char>(vida);
-			aux_jogada[1] = static_cast<char>(linha);
-			aux_jogada[2] = static_cast<char>(coluna);
-			aux_jogada[3] = 'E';
-			aux_jogada[4] = '\0';
-
-			byteCount = send(clientSocket, (char*)aux_jogada, sizeof(aux_jogada), 0);
-
-		}
-		memset(&aux_jogada, 0, 5);
+		Sleep(3000);
 		system("clear||cls");
 
 	} 	while (1);

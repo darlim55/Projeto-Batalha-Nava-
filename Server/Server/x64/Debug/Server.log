@@ -1,9 +1,8 @@
 ﻿  Server.cpp
-C:\Users\Jorge\Desktop\c_\Server.cpp(159,19): warning C4244: 'argumento': conversão de 'SOCKET' para '_Ty', possível perda de dados
+C:\Users\Jorge\Desktop\c_\Server.cpp(202,19): warning C4244: 'argumento': conversão de 'SOCKET' para '_Ty', possível perda de dados
           with
           [
               _Ty=int
           ]
-C:\Users\Jorge\Desktop\c_\Server.cpp(89,6): warning C4101: 'byteCount': variável local não referenciada
-C:\Users\Jorge\Desktop\c_\Server.cpp(84,7): warning C4101: 'jogada1': variável local não referenciada
+C:\Users\Jorge\Desktop\c_\Server.cpp(102,7): warning C4101: 'jogada1': variável local não referenciada
   Server.vcxproj -> C:\Users\Jorge\source\repos\Server\x64\Debug\Server.exe

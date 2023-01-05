@@ -1,3 +1,4 @@
 ﻿  Client.cpp
-C:\Users\Jorge\Downloads\Client.cpp(105,7): warning C4101: 'p': variável local não referenciada
+C:\Users\Jorge\Downloads\Client.cpp(161,7): warning C4101: 'p': variável local não referenciada
+C:\Users\Jorge\Downloads\Client.cpp(321,7): warning C4101: 'aux_jogada': variável local não referenciada
   Client.vcxproj -> C:\Users\Jorge\source\repos\Client\x64\Debug\Client.exe

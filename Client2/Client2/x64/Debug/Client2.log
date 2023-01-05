@@ -1,5 +1,0 @@
-﻿  Client2.cpp
-C:\Users\Jorge\Desktop\c_\Client2.cpp(110,7): warning C4101: 'p': variável local não referenciada
-C:\Users\Jorge\Desktop\c_\Client2.cpp(171,7): warning C4101: 'message': variável local não referenciada
-C:\Users\Jorge\Desktop\c_\Client2.cpp(266,7): warning C4101: 'aux_resposta': variável local não referenciada
-  Client2.vcxproj -> C:\Users\Jorge\source\repos\Client2\x64\Debug\Client2.exe
